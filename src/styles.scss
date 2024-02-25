@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1 {
+  @apply mb-14 text-center font-title text-6xl text-secondary;
+}
+
+h2 {
+  @apply mb-4 font-title text-4xl;
+}
+
+p {
+  @apply mb-6;
+}

@@ -18,17 +18,21 @@ import { StarsComponent } from './stars.component';
     target="_blank"
     class="flex h-full flex-row rounded-md bg-primaryLighter transition-all hover:scale-[101%] hover:cursor-pointer"
   >
-    <img class="w-52 rounded-l-md object-cover" [src]="hosting.image" [alt]="hosting.title" />
-    <div class="flex h-full flex-1 flex-col p-5 ">
-      <div class="text-2xl font-medium">
-        <span
+    <img
+      class="aspect-square w-60 max-w-60 rounded-l-md object-cover"
+      [src]="'assets/images/' + hosting.image"
+      [alt]="hosting.title"
+    />
+    <div class="flex h-full flex-1 flex-col p-5 text-sm">
+      <div class="font-medium">
+        <span class="text-lg"
           >{{ hosting.title }}
           @if (hosting.type === 'hotel' && hosting.stars !== undefined) {
             <app-stars class="ml-2" [stars]="hosting.stars"></app-stars>
           }
         </span>
       </div>
-      <div class="text-lg">
+      <div>
         Prix : <span class="font-semibold">{{ hosting.priceRange | priceRange }}</span>
       </div>
       <br />
@@ -39,8 +43,10 @@ import { StarsComponent } from './stars.component';
         {{ hosting.address.city }}
       </div>
       <div class="italic">À {{ hosting.distanceKM }} km d'Herponcey</div>
-      <br />
-      <div class="italic">{{ hosting.description }}</div>
+      @if (hosting.description) {
+        <br />
+        <div class="italic">{{ hosting.description }}</div>
+      }
     </div>
   </a>`,
   changeDetection: ChangeDetectionStrategy.OnPush,

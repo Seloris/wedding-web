@@ -1,13 +1,23 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { Hosting, HostingType } from '../models/hosting';
+import { Hosting, HostingSort, HostingType } from '../models/hosting';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HostingsService {
+  sort = signal<HostingSort>('kmAsc');
   filter = signal<HostingType>('hotel');
   filteredHostings = computed(() => {
-    return this.hostings().filter((hosting) => this.filter() === hosting.type);
+    let filtered = this.hostings().filter((hosting) => this.filter() === hosting.type);
+
+    if (this.sort() === 'kmAsc') {
+      filtered = filtered.sort((a, b) => a.distanceKM - b.distanceKM);
+    } else if (this.sort() === 'priceAsc') {
+      filtered = filtered.sort((a, b) => a.priceRange - b.priceRange);
+    } else if (this.sort() === 'priceDesc') {
+      filtered = filtered.sort((a, b) => b.priceRange - a.priceRange);
+    }
+    return filtered;
   });
 
   private hostings = signal(ALL_HOSTINGS);
@@ -24,8 +34,7 @@ const ALL_HOSTINGS: Hosting[] = [
     type: 'hotel',
     stars: 3,
     url: 'https://aigle.brithotel.fr/',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'hotel-dauphin.jpg',
   },
   {
     title: 'Hôtel du Cygne',
@@ -35,41 +44,27 @@ const ALL_HOSTINGS: Hosting[] = [
     type: 'hotel',
     stars: 2,
     url: 'https://hotelrestaurantducygne-laigle.fr/',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'hotel-cygne.jpg',
   },
   {
     title: 'Le Clos Saint-Germain',
-    description: 'Sur le site Charme et tradition ou sur Booking',
+    description: '',
     address: { street: '3 rue Georges Clémenceau ', city: '27250 Rugles' },
     distanceKM: 7,
     priceRange: 2,
     type: 'cottage',
     url: 'https://www.booking.com/hotel/fr/le-clos-saint-germain-rugles.fr.html',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'clos-st-germain.jpg',
   },
   {
     title: "L'Évidence",
-    description: 'Piscine',
+    description: 'Avec piscine',
     address: { street: '13 rue du Général de Gaulle ', city: '27250 Rugles' },
     distanceKM: 7,
     priceRange: 3,
     type: 'cottage',
     url: 'https://sonata.hotel-detail-check.com/maison-d-39-hotes-l-39-evidence-france',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
-  },
-  {
-    title: 'Chambre Rétro Chic chez Caroline',
-    description: 'Sur Airbnb ou sur Booking. Piscine',
-    address: { city: '27250 Rugles', street: '' },
-    distanceKM: 7,
-    priceRange: 3,
-    type: 'cottage',
-    url: 'https://www.airbnb.fr/rooms/53757991?source_impression_id=p3_1708451738_zwAaZ7SLMJKv8fM1',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'evidence.jpg',
   },
   {
     title: 'Gîte en Normandie',
@@ -79,8 +74,7 @@ const ALL_HOSTINGS: Hosting[] = [
     priceRange: 3,
     type: 'cottage',
     url: 'https://www.booking.com/hotel/fr/gite-en-normandie.fr.html',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'gite-normandie.jpg',
   },
   {
     title: 'Logement plain-pied nature',
@@ -90,30 +84,27 @@ const ALL_HOSTINGS: Hosting[] = [
     priceRange: 2,
     type: 'cottage',
     url: 'https://www.airbnb.fr/rooms/949873916941254957?source_impression_id=p3_1708452908_H5mauOle%2F86daN8I',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'logement-plain-pied.webp',
   },
   {
-    title: 'Château de Transière',
-    description: 'Avec piscine.',
+    title: 'Château de Transières',
+    description: 'Avec piscine',
     address: { city: '27250 Ambenai', street: '' },
     distanceKM: 6,
     priceRange: 3,
     type: 'cottage',
     url: 'https://www.booking.com/hotel/fr/chambre-d-hote-chateau-de-transieres.fr.html',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'transieres.jpg',
   },
   {
     title: 'Escale normande - Chez Michelle',
-    description: 'Sur Airbnb ou appeler le 07 60 60 91 57',
+    description: 'Sur airbnb ou au 07 60 60 91 57',
     address: { city: "61300 L'Aigle", street: '' },
     distanceKM: 7,
     priceRange: 1,
     type: 'cottage',
     url: 'https://www.airbnb.fr/rooms/4372673',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'chez-michelle.webp',
   },
   {
     title: 'Studio Terrasse',
@@ -123,19 +114,17 @@ const ALL_HOSTINGS: Hosting[] = [
     priceRange: 1,
     type: 'cottage',
     url: 'https://www.airbnb.fr/rooms/43555831',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'studio-terrasse.webp',
   },
   {
-    title: "Centre L'Aigle - Agréable maison bien rénovée",
+    title: "Centre L'Aigle",
     description: '170 € pour 2 personnes, 240 € pour 6 personnes',
     address: { city: "61300 L'Aigle", street: '' },
     distanceKM: 7,
     priceRange: 2,
     type: 'cottage',
     url: 'https://www.airbnb.fr/rooms/581061254175552330',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'agreable-maison.webp',
   },
   {
     title: 'Petit manoir chez Dom',
@@ -144,8 +133,7 @@ const ALL_HOSTINGS: Hosting[] = [
     priceRange: 2,
     type: 'cottage',
     url: 'https://fr.airbnb.ca/rooms/933949922193254845',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'chez-dom.webp',
   },
   {
     title: 'Rouge Maison',
@@ -155,19 +143,17 @@ const ALL_HOSTINGS: Hosting[] = [
     priceRange: 2,
     type: 'cottage',
     url: 'https://www.booking.com/hotel/fr/rouge-maison-bois-normand-pres-lyre.fr.html',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'rouge.jpg',
   },
   {
     title: 'Maison Myjune Cosy cottage à Rai',
-    description: 'Pour 4 personnes, 2 chambres,100 m2.  330 € pour 2 nuits.',
+    description: 'Pour 4 personnes, 2 chambres, 100 m2.',
     address: { city: '61270 Rai', street: '' },
     distanceKM: 12,
     priceRange: 3,
     type: 'cottage',
     url: 'https://www.airbnb.fr/rooms/939788327535250397',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'rai.webp',
   },
   {
     title: 'Roulotte',
@@ -177,8 +163,7 @@ const ALL_HOSTINGS: Hosting[] = [
     priceRange: 1,
     type: 'cottage',
     url: 'https://www.booking.com/hotel/fr/roulotte-la-ferte-en-ouche.fr.html',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'roulotte.jpg',
   },
   {
     title: 'Château du Mesnil',
@@ -187,8 +172,7 @@ const ALL_HOSTINGS: Hosting[] = [
     priceRange: 2,
     type: 'cottage',
     url: 'https://fr.hotels.com/ho675874/chateau-du-mesnil-la-vieille-lyre-france/',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'mesnil.png',
   },
   {
     title: 'Chambre et chevaux chez Mina',
@@ -197,30 +181,27 @@ const ALL_HOSTINGS: Hosting[] = [
     priceRange: 1,
     type: 'cottage',
     url: 'https://www.airbnb.fr/rooms/32467314',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'mina.webp',
   },
   {
     title: "Chambre d'hôtes Le Buisson",
-    description: 'Chambre de charme à la ferme (site Charme et tradition). Chez M. et Mme Thouret.',
+    description: 'Chambre de charme à la ferme',
     address: { city: '61270 Écorcei', street: '' },
     distanceKM: 15,
     priceRange: 1,
     type: 'cottage',
     url: 'https://www.charme-traditions.com/fr/chambres-d-hotes/org/2996/le-buisson',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'chambres-d-hotes-le-buisson.jpg',
   },
   {
     title: 'Gîte familial indépendant à la ferme',
-    description: ' De 1 à 6 personnes, sur Airbnb',
+    description: 'De 1 à 6 personnes',
     address: { city: '61270 La Chapelle-Viel', street: '' },
     distanceKM: 15,
     priceRange: 1,
     type: 'cottage',
     url: 'https://www.airbnb.fr/rooms/939790362438355126',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'gite-familial.webp',
   },
   {
     title: 'Le Bôquet',
@@ -230,30 +211,27 @@ const ALL_HOSTINGS: Hosting[] = [
     priceRange: 1,
     type: 'cottage',
     url: 'https://www.airbnb.fr/rooms/24985538',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'leboquet.webp',
   },
   {
     title: 'Petite maison de campagne',
-    description: 'Pour 3 personnes, 2 nuits 210 €',
+    description: 'Pour 3 personnes',
     address: { city: 'La Ferté-en-Ouche', street: '' },
     distanceKM: 19,
     priceRange: 1,
     type: 'cottage',
     url: 'https://www.airbnb.fr/rooms/988261894495082650',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'petite-maison.webp',
   },
   {
     title: 'Four à pain',
-    description: '2 nuits 170 €',
+    description: '2 nuits minimum',
     address: { city: '61190 Irai', street: '' },
     distanceKM: 19,
     priceRange: 1,
     type: 'cottage',
     url: 'https://www.airbnb.fr/rooms/43911360',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'fourapain.webp',
   },
   {
     title: 'Au Manoir de la Barre',
@@ -262,8 +240,7 @@ const ALL_HOSTINGS: Hosting[] = [
     priceRange: 2,
     type: 'cottage',
     url: 'https://www.booking.com/hotel/fr/au-manoir-de-la-barre.tl.html',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'la-barre.jpg',
   },
   {
     title: 'Château du Blanc Buisson',
@@ -272,8 +249,7 @@ const ALL_HOSTINGS: Hosting[] = [
     priceRange: 3,
     type: 'cottage',
     url: 'https://www.blancbuisson.com/',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'blancbuisson.jpg',
   },
   {
     title: 'Le Garance',
@@ -282,85 +258,76 @@ const ALL_HOSTINGS: Hosting[] = [
     priceRange: 1,
     type: 'cottage',
     url: 'https://www.legarance.fr/',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'garance.jpg',
   },
   {
     title: 'Chez Élo',
-    description: 'Maison 100m2 avec jardin pour 6 personnes (3 chambres). 290 € pour 2 nuits.',
+    description: 'Maison 100m2 avec jardin pour 6 personnes (3 chambres). 2 nuits minimum',
     address: { city: "61300 Saint-Martin d'Écublei", street: '' },
     distanceKM: 2,
     priceRange: 1,
     type: 'house',
     url: 'https://www.airbnb.fr/rooms/761435425357926103',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'elo.jpg',
   },
   {
     title: 'Maison de 3 chambres',
-    description:
-      'Avec jardin clos et wifi (Booking – ou Airbnb : 300 € pour 2 nuits). Maison 3 chambres pour 6 personnes.',
+    description: 'Avec jardin clos. Maison 3 chambres pour 6 personnes. 2 nuits minimum',
     address: { street: '12 rue des Landes', city: '27250 Chéronvilliers' },
     distanceKM: 7,
     priceRange: 1,
     type: 'house',
     url: 'https://www.airbnb.fr/rooms/7926855',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'maison3chambre.webp',
   },
   {
     title: 'Gîte normand avec piscine couverte',
-    description: '6 personnes, 350 € pour 2 nuits.',
+    description: '6 personnes. 2 nuits minimum',
     address: { city: '27250 Neaufles-Auvergny', street: '' },
     distanceKM: 9,
     priceRange: 2,
     type: 'house',
     url: 'https://www.airbnb.fr/rooms/35434478',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'gitenormand.webp',
   },
   {
     title: "Maison d'hôtes",
-    description: 'Avec jardin, 6 personnes, 3 chambres, 2 salles de bain. 100 € la nuit.',
+    description: 'Avec jardin, 6 personnes, 3 chambres',
     address: { street: ' Rue du Moulin', city: '61300 Crulai' },
     distanceKM: 15,
     priceRange: 2,
     type: 'house',
     url: 'https://www.airbnb.fr/rooms/10241453',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'maisonhotes.jpg',
   },
   {
     title: 'La Grange du Bois Germain',
-    description: 'Villa 4 chambres : 340 €  pour 8 personnes. 06 48 67 10 36',
+    description: 'Villa 4 chambres. 2 nuits minimum. 06 48 67 10 36',
     address: { street: '1A route des Platanes', city: '27250 Saint-Antonin-de-Sommaire' },
     distanceKM: 6,
     priceRange: 2,
     type: 'house',
     url: 'https://www.airbnb.fr/rooms/852979640002839649',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'grange.webp',
   },
   {
     title: "Le Refuge de l'Abbaye",
-    description: 'Gîte ou chambres individuelles. 06 85 19 55 13 ou Booking.',
+    description: 'Gîte ou chambres individuelles. 06 85 19 55 13',
     address: { city: '61550 Saint-Evroult-Notre-Dame-du-Bois', street: '' },
     distanceKM: 20,
     priceRange: 2,
     type: 'house',
     url: 'https://www.gites-de-france-orne.com/location-vacances-Gite-Saint-evroult-notre-dame-du-bois-61G880.html',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'le-refuge.jpg',
   },
   {
     title: "L'Ajoussienne",
-    description: 'Maison de 3 chambres pour 6 personnes. 350€ le week-end.',
+    description: 'Maison de 3 chambres pour 6 personnes',
     address: { street: ' 2 route de Bernay', city: '27410 Ajou' },
     distanceKM: 23,
     priceRange: 1,
     type: 'house',
     url: 'https://www.lajoussienne.com/',
-    image:
-      'https://www.normandie-tourisme.fr/wp-content/uploads/wpetourisme/hotel-du-dauphin-2.jpg',
+    image: 'ajou.webp',
   },
 ];

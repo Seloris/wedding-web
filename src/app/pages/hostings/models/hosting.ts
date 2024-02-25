@@ -13,3 +13,5 @@ export type Hosting = {
 
 export type HostingPriceRange = 1 | 2 | 3;
 export type HostingType = 'hotel' | 'cottage' | 'house';
+
+export type HostingSort = 'kmAsc' | 'priceAsc' | 'priceDesc';

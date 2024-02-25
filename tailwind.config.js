@@ -13,7 +13,8 @@ module.exports = {
         white: 'white',
       },
       fontFamily: {
-        main: '"noto-serif", serif',
+        body: '"noto-serif", serif',
+        title: '"bodoni-pt-variable", serif',
       },
     },
   },

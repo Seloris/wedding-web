@@ -8,21 +8,22 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   imports: [CommonModule, RouterLink, RouterLinkActive],
   styles: [
     `
-      .active {
-        text-decoration: underline;
+      .active .line {
+        display: block;
       }
     `,
   ],
   template: `<div class="flex h-36 flex-row justify-center">
-    <div class="flex h-full flex-row items-center ">
+    <div class="flex h-full flex-row items-center font-title">
       <img class="mr-16 h-24" src="assets/logo.svg" alt="logo" />
       @for (link of links(); track link.path) {
         <a
-          class="font m-5 text-xl text-secondary"
+          class="relative m-5 text-2xl text-secondary"
           [routerLink]="link.path"
           routerLinkActive="active"
-          >{{ link.label }}</a
-        >
+          ><span>{{ link.label }}</span>
+          <div class="line absolute hidden h-[1px] w-7 bg-secondary"></div
+        ></a>
       }
     </div>
   </div>`,
@@ -31,10 +32,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class HeaderComponent {
   links = signal<Link[]>([
     { label: 'Le mariage', path: '/mariage' },
-    { label: 'Hébergements', path: '/hebergements' },
-    { label: 'Notre liste', path: '/notre-liste' },
-    { label: 'Galerie', path: '/galerie' },
-    { label: 'Contact', path: '/contact' },
+    { label: 'Les hébergements', path: '/hebergements' },
+    { label: 'Rsvp', path: '/rsvp' },
+    { label: 'La liste', path: '/notre-liste' },
+    { label: 'Les photos', path: '/galerie' },
   ]);
 }
 

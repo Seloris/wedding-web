@@ -41,6 +41,7 @@
     "@angular/compiler-cli": "^17.2.0",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
+    "@types/lodash-es": "^4.17.12",
     "@types/node": "^18.18.0",
     "@typescript-eslint/eslint-plugin": "6.19.0",
     "@typescript-eslint/parser": "6.19.0",
@@ -54,6 +55,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "lodash-es": "^4.17.21",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "~5.3.2"
