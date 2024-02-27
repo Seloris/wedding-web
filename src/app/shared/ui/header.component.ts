@@ -55,13 +55,23 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       </div>
     }
 
-    <img
-      class="z-20 w-10 lg:hidden"
-      src="assets/menu.svg"
-      alt="menu"
-      aria-hidden="true"
-      (click)="isOpened.set(!isOpened())"
-    />
+    @if (isOpened()) {
+      <img
+        class="z-20 w-10 hover:cursor-pointer lg:hidden"
+        src="assets/close.svg"
+        alt="close"
+        aria-hidden="true"
+        (click)="isOpened.set(!isOpened())"
+      />
+    } @else {
+      <img
+        class="z-20 w-10 hover:cursor-pointer lg:hidden"
+        src="assets/menu.svg"
+        alt="menu"
+        aria-hidden="true"
+        (click)="isOpened.set(!isOpened())"
+      />
+    }
   </div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -71,7 +81,7 @@ export class HeaderComponent {
     { label: 'Le mariage', path: '/mariage' },
     { label: 'Les hébergements', path: '/hebergements' },
     { label: 'Rsvp', path: '/rsvp' },
-    { label: 'La liste', path: '/notre-liste' },
+    { label: 'Notre liste', path: '/notre-liste' },
     { label: 'Les photos', path: '/galerie' },
   ]);
 

@@ -34,7 +34,6 @@ import { PageComponent } from '../shared/ui/page.component';
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1572.000543710112!2d0.7096360973022776!3d48.82262213805969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e178935640ccc9%3A0xa02ee9c4c148315f!2s%C3%89glise%20Saint-Germain%20de%20Rugles!5e0!3m2!1sfr!2sfr!4v1708878941482!5m2!1sfr!2sfr"
         allowfullscreen=""
         loading="lazy"
-        (load)="myLoadEvent()"
         referrerpolicy="no-referrer-when-downgrade"
       ></iframe>
     </div>
@@ -49,8 +48,8 @@ import { PageComponent } from '../shared/ui/page.component';
           Puis nous nous retrouverons au Château d'Herponcey pour le cocktail et le dîner.
         </p>
         <p class="italic">
-          Attention, le château d'Herponcey n'est pas répertorié sur Google Maps, uniquement le
-          village d'Herponcey l'est. <br />
+          Attention, le château d'Herponcey n'est pas répertorié sur Google Maps, c'est le village
+          d'Herponcey qui l'est. <br />
           Vous trouverez ci-dessous les coordonnées exactes ainsi que l'entrée du chemin pour y
           accéder.
         </p>
@@ -73,8 +72,4 @@ import { PageComponent } from '../shared/ui/page.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, PageComponent, DotsComponent],
 })
-export class WeddingDetailsComponent {
-  myLoadEvent() {
-    console.log('toto');
-  }
-}
+export class WeddingDetailsComponent {}

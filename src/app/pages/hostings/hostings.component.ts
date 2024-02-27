@@ -16,7 +16,10 @@ import { HostingCardComponent } from './ui/hosting-card.component';
     }
 
     .hostings-grid {
-      grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      @media (min-width: 1024px) {
+        grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+      }
     }
   `,
   template: `
@@ -49,9 +52,7 @@ import { HostingCardComponent } from './ui/hosting-card.component';
         [options]="sortOptions"
         (optionChange)="setSort($event)"
       ></app-select>
-      <div
-        class="hostings-grid mt-10 flex flex-col items-center justify-center gap-8 lg:grid lg:flex-wrap"
-      >
+      <div class="hostings-grid mt-10 grid items-center justify-center gap-8">
         @for (hosting of hostingsService.filteredHostings(); track hosting.title) {
           <app-hosting-card class="" [hosting]="hosting"></app-hosting-card>
         }
