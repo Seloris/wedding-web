@@ -10,9 +10,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
       display: block;
     }
   `,
-  template: `<div class="f flex flex-col items-center justify-center p-4">
+  template: `<div class="f flex flex-col items-center justify-center p-8">
     <img class="mb-4 h-6" src="assets/separator.svg" alt="sepator" />
-    <div class="text-secondary">© 2024 par Daniel & Madeleine</div>
+    <div class="text-secondary">© 2024 par Daniel & Madeleine &dash; 1.1</div>
   </div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

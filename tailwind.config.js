@@ -9,6 +9,7 @@ module.exports = {
         primaryLighter: '#eae6e0',
         secondary: '#548F9E',
         secondaryLighter: '#cbd6d9',
+        background: '#fafaf9',
         black: 'black',
         white: 'white',
       },
@@ -16,8 +17,17 @@ module.exports = {
         body: '"noto-serif", serif',
         title: '"bodoni-pt-variable", serif',
       },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.1s ease-in-out forwards',
+      },
     },
   },
   plugins: [],
-  safelist: [],
+  safelist: ['opacity-0'],
 };

@@ -15,7 +15,7 @@ import { HostingCardComponent } from './ui/hosting-card.component';
       display: block;
     }
 
-    .grid {
+    .hostings-grid {
       grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
     }
   `,
@@ -27,12 +27,17 @@ import { HostingCardComponent } from './ui/hosting-card.component';
         Pour chaque hébergement, vous trouverez une fourchette de prix indicatifs (de € à €€€) ainsi
         que la distance par rapport au lieu de réception. Les prix indiqués ont été relevés en
         février 2024.
-        <br /><br />
+      </p>
+      <p class="text-center">
+        La catégorie <span class="italic">Les maisons</span> regroupe des logements prévus pour 6 à
+        8 personnes.
+      </p>
+      <p class="text-center">
         Au clic, vous serez redirigé vers un des sites qui proposent l'hébergement. <br />Ils sont
         parfois disponibles sur plusieurs plateformes.
       </p>
       <app-select
-        class="mt-6"
+        class=""
         [selected]="hostingsService.filter()"
         [options]="filtersOptions"
         (optionChange)="setFilter($event)"
@@ -44,7 +49,9 @@ import { HostingCardComponent } from './ui/hosting-card.component';
         [options]="sortOptions"
         (optionChange)="setSort($event)"
       ></app-select>
-      <div class="mt-14 grid flex-wrap items-center justify-center gap-8">
+      <div
+        class="hostings-grid mt-10 flex flex-col items-center justify-center gap-8 lg:grid lg:flex-wrap"
+      >
         @for (hosting of hostingsService.filteredHostings(); track hosting.title) {
           <app-hosting-card class="" [hosting]="hosting"></app-hosting-card>
         }
@@ -60,11 +67,11 @@ export class HostingsComponent {
   filtersOptions: Option<HostingType>[] = [
     { label: 'Les hôtels', value: 'hotel' },
     { label: 'Les gîtes', value: 'cottage' },
-    { label: 'Les maisons (6 à 8 pers.)', value: 'house' },
+    { label: 'Les maisons', value: 'house' },
   ];
 
   sortOptions: Option<HostingSortType>[] = [
-    { label: 'les plus proches du lieu de réception', value: 'kmAsc' },
+    { label: 'les plus proches', value: 'kmAsc' },
     { label: 'par prix croissants', value: 'priceAsc' },
     { label: 'par prix décroissants', value: 'priceDesc' },
   ];

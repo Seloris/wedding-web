@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, Renderer2, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './shared/ui/footer.component';
 import { HeaderComponent } from './shared/ui/header.component';
@@ -6,16 +7,32 @@ import { HeaderComponent } from './shared/ui/header.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  styles: [``],
-  template: `<div class="flex h-full flex-col">
-    <app-header> </app-header>
-    <main class="flex-1 pb-6">
+  styles: [
+    `
+      :host {
+      }
+    `,
+  ],
+  template: `<div class="relative flex h-full flex-col">
+    <app-header></app-header>
+    <main class="relative flex-1">
       <router-outlet></router-outlet>
     </main>
     <app-footer></app-footer>
   </div>`,
   imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  animations: [],
 })
-export class AppComponent {
-  title = 'wedding-web';
+export class AppComponent implements OnInit {
+  renderer = inject(Renderer2);
+  doc = inject(DOCUMENT);
+  ngOnInit() {
+    setTimeout(() => {
+      this.renderer.addClass(this.doc.getElementById('splash'), 'opacity-0');
+    }, 750);
+
+    setTimeout(() => {
+      this.renderer.removeChild(this.doc.body, this.doc.getElementById('splash'));
+    }, 1750);
+  }
 }

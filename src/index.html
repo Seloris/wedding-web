@@ -4,7 +4,11 @@
     <meta charset="utf-8" />
     <title>WeddingWeb</title>
     <base href="/" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1" />  -->
+    <meta
+      name="viewport"
+      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,7 +19,17 @@
 
     <link rel="stylesheet" href="https://use.typekit.net/fin1gio.css" />
   </head>
-  <body class="h-full w-full bg-[#fafaf9] font-body text-lg text-primary">
+  <body class="relative h-full w-full bg-background font-body text-lg text-primary">
     <app-root></app-root>
+    <div
+      id="splash"
+      class="fixed bottom-0 left-0 right-0 top-0 z-50 bg-white transition-all duration-1000 ease-out"
+    >
+      <img
+        class="absolute left-1/2 top-1/2 h-32 -translate-x-1/2 -translate-y-1/2"
+        src="assets/logo.svg"
+        alt="logo"
+      />
+    </div>
   </body>
 </html>

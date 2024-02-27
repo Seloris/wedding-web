@@ -10,16 +10,17 @@ import { StarsComponent } from './stars.component';
   styles: `
     :host {
       display: block;
+      @apply lg:h-full;
       height: 100%;
     }
   `,
   template: ` <a
     [href]="hosting.url"
     target="_blank"
-    class="flex h-full flex-row rounded-md bg-primaryLighter transition-all hover:scale-[101%] hover:cursor-pointer"
+    class="flex max-w-xl flex-row flex-wrap rounded-md bg-primaryLighter transition-all hover:scale-[101%] hover:cursor-pointer"
   >
     <img
-      class="aspect-square w-60 max-w-60 rounded-l-md object-cover"
+      class="aspect-square w-40 max-w-40 rounded-l-md object-cover sm:w-48 sm:max-w-48 lg:w-60 lg:max-w-60"
       [src]="'assets/images/' + hosting.image"
       [alt]="hosting.title"
     />
@@ -40,9 +41,9 @@ import { StarsComponent } from './stars.component';
         @if (hosting.address.street) {
           {{ hosting.address.street }},
         }
-        {{ hosting.address.city }}
+        {{ hosting.address.city }} &ndash;
+        <span class="italic">À {{ hosting.distanceKM }}&nbsp;km d'Herponcey</span>
       </div>
-      <div class="italic">À {{ hosting.distanceKM }} km d'Herponcey</div>
       @if (hosting.description) {
         <br />
         <div class="italic">{{ hosting.description }}</div>

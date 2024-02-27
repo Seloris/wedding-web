@@ -12,13 +12,19 @@ import { Option } from '../models/option';
     }
   `,
   template: `<div
-    class="-mx-4 flex flex-row items-start"
-    [ngClass]="{ 'text-2xl': mode === 'main', 'text-xl text-secondary': mode === 'alt' }"
+    class="-mx-4 flex flex-row flex-wrap items-start"
+    [ngClass]="{
+      'text-lg lg:text-xl': mode === 'main',
+      'text-md text-secondary lg:text-lg': mode === 'alt'
+    }"
   >
     @for (f of options; track selected) {
       <button
-        class="relative mx-3 p-2"
-        [ngClass]="{ 'opacity-100': f.value === selected, 'opacity-50': f.value !== selected }"
+        class="relative mx-1 p-2 text-left lg:mx-3"
+        [ngClass]="{
+          'font-semibold opacity-100': f.value === selected,
+          'opacity-70': f.value !== selected
+        }"
         (click)="optionChange.emit(f.value)"
       >
         <span>{{ f.label }}</span>

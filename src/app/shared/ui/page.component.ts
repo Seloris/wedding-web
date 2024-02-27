@@ -10,7 +10,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     `
       :host {
         display: block;
-        @apply m-auto my-12 flex max-w-7xl flex-col px-24;
+        @apply my-12 flex w-full flex-col px-6 lg:mx-auto lg:max-w-7xl lg:px-24;
       }
     `,
   ],
