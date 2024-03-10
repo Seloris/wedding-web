@@ -9,7 +9,7 @@
     "test": "ng test",
     "serve:ssr:wedding-web": "node dist/wedding-web/server/server.mjs",
     "lint": "ng lint",
-    "deploy": "ng deploy --base-href=/wedding-web/"
+    "deploy": "ng deploy --base-href=/"
   },
   "private": true,
   "dependencies": {
