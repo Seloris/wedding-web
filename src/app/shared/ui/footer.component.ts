@@ -12,7 +12,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   `,
   template: `<div class="f flex flex-col items-center justify-center p-8">
     <img class="mb-4 h-6" src="assets/separator.svg" alt="sepator" />
-    <div class="text-secondary">Daniel & Madeleine <span class="text-xs">&dash; 1.0.5</span></div>
+    <div class="text-secondary">Daniel & Madeleine <span class="text-xs">&dash; 1.0.6</span></div>
   </div>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

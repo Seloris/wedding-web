@@ -80,7 +80,6 @@ export class HeaderComponent {
   links = signal<Link[]>([
     { label: 'Le mariage', path: '/mariage' },
     { label: 'Les hébergements', path: '/hebergements' },
-    { label: 'Rsvp', path: '/rsvp' },
     { label: 'Notre liste', path: '/notre-liste' },
     { label: 'Les photos', path: '/galerie' },
   ]);

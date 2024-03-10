@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, OnInit, Renderer2, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AppService } from './app.service';
 import { FooterComponent } from './shared/ui/footer.component';
 import { HeaderComponent } from './shared/ui/header.component';
 
@@ -26,6 +27,8 @@ import { HeaderComponent } from './shared/ui/header.component';
 export class AppComponent implements OnInit {
   renderer = inject(Renderer2);
   doc = inject(DOCUMENT);
+  appService = inject(AppService);
+
   ngOnInit() {
     setTimeout(() => {
       this.renderer.addClass(this.doc.getElementById('splash'), 'opacity-0');
@@ -34,5 +37,7 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       this.renderer.removeChild(this.doc.body, this.doc.getElementById('splash'));
     }, 1750);
+
+    this.appService.initFirebase();
   }
 }

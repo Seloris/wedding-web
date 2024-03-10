@@ -28,8 +28,7 @@ import { HostingCardComponent } from './ui/hosting-card.component';
       <p class="text-center">
         Voici quelques suggestions d'hébergements pour votre séjour en Normandie.<br /><br />
         Pour chaque hébergement, vous trouverez une fourchette de prix indicatifs (de € à €€€) ainsi
-        que la distance par rapport au lieu de réception. Les prix indiqués ont été relevés en
-        février 2024.
+        que la distance par rapport au lieu de réception. Les prix indiqués datent de février 2024.
       </p>
       <p class="text-center">
         La catégorie <span class="italic">Les maisons</span> regroupe des logements prévus pour 6 à

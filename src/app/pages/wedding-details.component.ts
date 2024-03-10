@@ -8,7 +8,7 @@ import { PageComponent } from '../shared/ui/page.component';
   standalone: true,
   template: `<app-page>
     <img
-      class="mb-12 hidden h-72 w-full object-cover sm:block lg:h-96"
+      class="mb-12 hidden h-72 w-full object-cover sm:block xl:h-96"
       src="assets/images/herponcey-wide.jpg"
       alt="Château d'Herponcey"
     />
@@ -19,19 +19,23 @@ import { PageComponent } from '../shared/ui/page.component';
     />
     <h1 class="text-center">Le mariage</h1>
     <div
-      class="flex flex-col items-center justify-center text-center lg:flex-row-reverse lg:items-start lg:overflow-hidden lg:rounded-xl lg:bg-white lg:text-left"
+      class="flex flex-col items-center justify-center text-center xl:flex-row-reverse xl:items-start xl:overflow-hidden xl:rounded-xl xl:bg-white xl:text-left"
     >
-      <div class="flex flex-col lg:mx-12 lg:my-8 lg:flex-1">
+      <div class="flex flex-col xl:mx-12 xl:my-8 xl:flex-1">
         <h2 class="">La cérémonie religieuse</h2>
         <p>
-          À 16h30 commence la cérémonie religieuse <br class="hidden lg:block" />
-          à l'église Saint-Germain de Rugles.
+          À 16h30 commence la cérémonie religieuse <br class="hidden xl:block" />
+          à l'église Saint-Germain de Rugles, Place Foch.
         </p>
-        <p>Place Foch, 27250 Rugles</p>
+        <p>
+          Pour stationner à Rugles : la petite place de l'église sera réservée aux mariés et à leurs
+          parents, mais vous trouverez différents parking à proximité dont certains indiqués sur la
+          carte.
+        </p>
       </div>
       <iframe
-        class="mt-3 h-96 w-full max-w-full lg:mt-0 lg:max-w-lg"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1572.000543710112!2d0.7096360973022776!3d48.82262213805969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e178935640ccc9%3A0xa02ee9c4c148315f!2s%C3%89glise%20Saint-Germain%20de%20Rugles!5e0!3m2!1sfr!2sfr!4v1708878941482!5m2!1sfr!2sfr"
+        class="mt-3 h-96 w-full max-w-full xl:mt-0 xl:max-w-lg"
+        src="https://www.google.com/maps/d/u/0/embed?mid=1SujMwO3DWVg4oWTYF-2VMIJ5snd9l7A&ehbc=2E312F&noprof=1&z=17"
         allowfullscreen=""
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
@@ -39,24 +43,23 @@ import { PageComponent } from '../shared/ui/page.component';
     </div>
     <app-dots class="mx-auto my-6" [amount]="3"></app-dots>
     <div
-      class="flex flex-col items-center justify-center text-center lg:flex-row lg:items-start lg:overflow-hidden lg:rounded-xl lg:bg-white lg:text-left"
+      class="flex flex-col items-center justify-center text-center xl:flex-row xl:items-start xl:overflow-hidden xl:rounded-xl xl:bg-white xl:text-left"
     >
-      <div class="flex flex-col lg:mx-12 lg:my-8 lg:flex-1">
+      <div class="flex flex-col xl:mx-12 xl:my-8 xl:flex-1">
         <h2 class="">La réception</h2>
 
         <p class="">
-          Puis nous nous retrouverons au Château d'Herponcey pour le cocktail et le dîner.
+          Après la cérémonie religieuse, nous nous retrouverons chez Pierre et Edmée. Le château
+          d'Herponcey se trouve à 4 km de Rugles, sur la D830 qui mène de Rugles vers L'Aigle.
         </p>
         <p class="italic">
-          Attention, le château d'Herponcey n'est pas répertorié sur Google Maps, c'est le village
-          d'Herponcey qui l'est. <br />
-          Vous trouverez ci-dessous les coordonnées exactes ainsi que l'entrée du chemin pour y
-          accéder.
+          Attention, le château d'Herponcey n'est pas répertorié sur Google Maps, ses coordoonées
+          GPS sont : <span class="whitespace-nowrap font-medium">48.79835, 0.69436</span>
         </p>
       </div>
 
       <iframe
-        class="mt-3 h-96 w-full max-w-full lg:mt-0 lg:max-w-lg"
+        class="mt-3 h-96 w-full max-w-full xl:mt-0 xl:max-w-lg"
         src="https://www.google.com/maps/d/embed?mid=1W-d-KcUZAFLbva9vsj1OvWsowMWirZc&ehbc=2E312F&noprof=1&z=15"
         allowfullscreen=""
         loading="lazy"

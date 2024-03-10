@@ -13,3 +13,8 @@ h2 {
 p {
   @apply mb-6;
 }
+
+input,
+textarea {
+  @apply p-2;
+}
