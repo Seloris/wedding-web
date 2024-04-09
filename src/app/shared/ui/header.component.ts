@@ -21,14 +21,21 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
     <!-- Desktop -->
     <div class="ml-16 hidden flex-row items-center bg-background font-title lg:flex">
-      @for (link of links(); track link.path) {
-        <a
-          class="relative m-5 text-2xl text-secondary"
-          [routerLink]="link.path"
-          routerLinkActive="active"
-          ><span>{{ link.label }}</span>
-          <div class="line absolute hidden h-[1px] w-7 bg-secondary"></div
-        ></a>
+      @for (link of links(); track $index) {
+        @if (link.path) {
+          <a
+            class="relative m-5 text-2xl text-secondary"
+            [routerLink]="link.path"
+            routerLinkActive="active"
+            ><span>{{ link.label }}</span>
+            <div class="line absolute hidden h-[1px] w-7 bg-secondary"></div
+          ></a>
+        } @else if (link.externalLink) {
+          <a class="relative m-5 text-2xl text-secondary" [href]="link.externalLink" target="_blank"
+            ><span>{{ link.label }}</span>
+            <div class="line absolute hidden h-[1px] w-7 bg-secondary"></div
+          ></a>
+        }
       }
     </div>
 
@@ -42,15 +49,26 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       <div
         class="absolute right-2 top-24 z-20 ml-16 flex animate-fade-in flex-col items-center rounded-md bg-background font-title shadow-md lg:hidden"
       >
-        @for (link of links(); track link.path) {
-          <a
-            class="relative m-5 text-2xl text-secondary"
-            [routerLink]="link.path"
-            routerLinkActive="active"
-            (click)="closeDrawer()"
-            ><span>{{ link.label }}</span>
-            <div class="line absolute hidden h-[1px] w-7 bg-secondary"></div
-          ></a>
+        @for (link of links(); track $index) {
+          @if (link.path) {
+            <a
+              class="relative m-5 text-2xl text-secondary"
+              [routerLink]="link.path"
+              routerLinkActive="active"
+              (click)="closeDrawer()"
+              ><span>{{ link.label }}</span>
+              <div class="line absolute hidden h-[1px] w-7 bg-secondary"></div
+            ></a>
+          } @else if (link.externalLink) {
+            <a
+              class="relative m-5 text-2xl text-secondary"
+              [href]="link.externalLink"
+              target="_blank"
+              (click)="closeDrawer()"
+              ><span>{{ link.label }}</span>
+              <div class="line absolute hidden h-[1px] w-7 bg-secondary"></div
+            ></a>
+          }
         }
       </div>
     }
@@ -80,7 +98,10 @@ export class HeaderComponent {
   links = signal<Link[]>([
     { label: 'Le mariage', path: '/mariage' },
     { label: 'Les hébergements', path: '/hebergements' },
-    { label: 'Notre liste', path: '/notre-liste' },
+    {
+      label: 'Notre liste',
+      externalLink: 'https://www.millemercismariage.com/daniel-madeleine/liste.html',
+    },
     { label: 'Les photos', path: '/galerie' },
   ]);
 
@@ -89,4 +110,4 @@ export class HeaderComponent {
   }
 }
 
-type Link = { label: string; path: string };
+type Link = { label: string; path?: string; externalLink?: string };

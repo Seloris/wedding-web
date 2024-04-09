@@ -7,7 +7,7 @@ import { PageComponent } from '../shared/ui/page.component';
   standalone: true,
   template: `<app-page>
     <h1 class="text-center">Galerie de photos</h1>
-    <p class="text-center">⚒ En cours de réalisation ⚒</p>
+    <p class="text-center">Aucune photo pour le moment...</p>
   </app-page>`,
   styles: `
     :host {

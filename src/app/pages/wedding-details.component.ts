@@ -9,12 +9,12 @@ import { PageComponent } from '../shared/ui/page.component';
   template: `<app-page>
     <img
       class="mb-12 hidden h-72 w-full object-cover sm:block xl:h-96"
-      src="assets/images/herponcey-wide.jpg"
+      src="assets/images/herponcey.jpg"
       alt="Château d'Herponcey"
     />
     <img
       class="mx-auto mb-12 block aspect-video max-w-full object-cover sm:hidden"
-      src="assets/images/herponcey-16-9.jpg"
+      src="assets/images/herponcey.jpg"
       alt="Château d'Herponcey"
     />
     <h1 class="text-center">Le mariage</h1>

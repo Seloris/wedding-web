@@ -66,7 +66,7 @@ export class HostingsComponent {
 
   filtersOptions: Option<HostingType>[] = [
     { label: 'Les hôtels', value: 'hotel' },
-    { label: 'Les gîtes', value: 'cottage' },
+    { label: "Les chambres d'hôtes", value: 'cottage' },
     { label: 'Les maisons', value: 'house' },
   ];
 
