@@ -18,3 +18,8 @@ input,
 textarea {
   @apply p-2;
 }
+
+.pswp--svg .pswp__button--arrow--right:before {
+  background: url('assets/logo.svg') !important;
+  background-image: url('assets/logo.svg') !important;
+}
