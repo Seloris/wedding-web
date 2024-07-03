@@ -30,7 +30,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets", "src/CNAME"],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles.scss", "node_modules/photoswipe/dist/photoswipe.css"],
             "scripts": [],
             "prerender": false
           },
